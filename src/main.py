@@ -431,14 +431,14 @@ def compare_logistic_regression_and_svm():
         eval_interval=EVAL_INTERVAL
     )
     
-    # SVM
+    # SVM - 使用更合理的参数配置
     print("  Training SVM...")
     svm = SVM(
         input_dim=X_train.shape[1],
         init_method='normal',
         optimizer='adam',
         learning_rate=0.001,
-        C=1.0,
+        C=10.0,  # 增加C值以减少正则化强度
         loss_type='hinge'
     )
     svm_history = svm.train(
@@ -499,8 +499,19 @@ def compare_logistic_regression_and_svm():
     print(f"  Recall: {lr_metrics['recall']:.4f}")
     print(f"  F1 Score: {lr_metrics['f1']:.4f}")
     
+    # 为SVM找到最佳阈值
+    print("Finding best threshold for SVM...")
+    # 使用训练集的一部分作为验证集来找最佳阈值
+    # 这里使用20%的训练数据
+    val_size = int(0.2 * len(X_train))
+    indices = np.random.permutation(len(X_train))
+    X_val, y_val = X_train[indices[:val_size]], y_train[indices[:val_size]]
+    
+    best_threshold = svm.find_best_threshold(X_val, y_val)
+    print(f"  Best threshold: {best_threshold:.4f}")
+    
     print("Final SVM performance on test set:")
-    svm_pred = svm.predict(X_test)
+    svm_pred = svm.predict(X_test, threshold=best_threshold)
     svm_metrics = evaluate_model(y_test, svm_pred)
     print(f"  Accuracy: {svm_metrics['accuracy']:.4f}")
     print(f"  Precision: {svm_metrics['precision']:.4f}")

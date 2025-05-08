@@ -121,20 +121,50 @@ class SVM:
         
         return grad_hinge + grad_reg
     
-    def predict(self, X, threshold=0.0):
+    def predict(self, X, threshold=None):
         """
         预测标签
         
         参数:
             X: 输入特征
-            threshold: 阈值
+            threshold: 阈值，如果为None则使用0.0
         
         返回:
             y_pred: 预测标签 (-1或1)
         """
         scores = self.compute_margin(X)
+        if threshold is None:
+            threshold = 0.0
         y_pred = np.where(scores >= threshold, 1, -1)
         return y_pred
+    
+    def find_best_threshold(self, X_val, y_val):
+        """
+        通过搜索找到最佳阈值
+        
+        参数:
+            X_val: 验证集特征
+            y_val: 验证集标签
+            
+        返回:
+            best_threshold: 最佳阈值
+        """
+        scores = self.compute_margin(X_val)
+        
+        # 尝试不同的阈值
+        thresholds = np.percentile(scores, np.arange(0, 100, 5))
+        best_accuracy = 0
+        best_threshold = 0.0
+        
+        for threshold in thresholds:
+            y_pred = np.where(scores >= threshold, 1, -1)
+            accuracy = np.mean(y_pred == y_val)
+            
+            if accuracy > best_accuracy:
+                best_accuracy = accuracy
+                best_threshold = threshold
+                
+        return best_threshold
     
     def train(self, X_train, y_train, X_test=None, y_test=None, 
               n_iterations=1000, batch_size=32, eval_interval=100):

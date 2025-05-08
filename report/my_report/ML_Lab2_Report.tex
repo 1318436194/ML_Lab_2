@@ -16,15 +16,86 @@
 
 \begin{document}
 
-\title{Machine Learning Laboratory 2: Logistic Regression and Support Vector Machine}
+\begin{titlepage}
 
-\author{\IEEEauthorblockN{Student Name}
-\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-\textit{University}\\
-Email: student@university.edu}
-}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 
-\maketitle
+\center % Center everything on the page
+ %----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+~\\[1cm]
+\includegraphics{SCUT.png}\\[2cm] % Include a department/university logo - this will require the graphicx package
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[1cm]
+{ \huge \bfseries The Experiment Report of \textit{Machine Learning} }\\[0.6cm] % Title of your document
+\HRule \\[2cm]
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+
+\textsc{\LARGE \textbf{School:} Shien-Ming Wu School of Intelligent Engineering}\\[1cm]
+\textsc{\LARGE \textbf{Subject:} Super Robot Everest Class}\\[2cm]
+
+
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Hua Zhong % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Mingkui Tan or Qingyao Wu % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Student ID:}\\
+202230235041
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Grade:} \\
+Undergraduate
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+% Define document title and author
+	\title{Linear Regression, Linear Classification and Gradient Descent}
+	\maketitle
 
 \begin{abstract}
 This laboratory report explores the implementation and comparison of Logistic Regression and Support Vector Machine (SVM) for binary classification problems. Both algorithms are implemented from scratch using numpy, with emphasis on understanding stochastic gradient descent (SGD) optimization. The experiment uses the a9a dataset from LIBSVM Data, which contains 32,561 training samples and 16,281 testing samples with 123 features. We investigate various aspects including parameter initialization methods, optimization algorithms (SGD and Adam), batch sizes, and loss functions. The report provides comprehensive results and analysis, comparing the performance of both models in terms of accuracy, precision, recall, and F1 score. Through this laboratory, we gain deeper insights into the similarities and differences between logistic regression and linear classification using SVM.
@@ -229,8 +300,8 @@ Figure \ref{fig:lr_vs_svm} compares the best configurations of logistic regressi
 \toprule
 \textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\
 \midrule
-Logistic Regression & 0.8432 & 0.7651 & 0.6805 & 0.7203 \\
-SVM & 0.8476 & 0.7724 & 0.6912 & 0.7294 \\
+Logistic Regression & 0.8401 & 0.7321 & 0.5094 & 0.6007 \\
+SVM & 0.8399 & 0.6988 & 0.5666 & 0.6258 \\
 \bottomrule
 \end{tabular}
 \end{table}
