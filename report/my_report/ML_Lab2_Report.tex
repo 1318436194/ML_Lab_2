@@ -101,9 +101,9 @@ Undergraduate
 This laboratory report explores the implementation and comparison of Logistic Regression and Support Vector Machine (SVM) for binary classification problems. Both algorithms are implemented from scratch using numpy, with emphasis on understanding stochastic gradient descent (SGD) optimization. The experiment uses the a9a dataset from LIBSVM Data, which contains 32,561 training samples and 16,281 testing samples with 123 features. We investigate various aspects including parameter initialization methods, optimization algorithms (SGD and Adam), batch sizes, and loss functions. The report provides comprehensive results and analysis, comparing the performance of both models in terms of accuracy, precision, recall, and F1 score. Through this laboratory, we gain deeper insights into the similarities and differences between logistic regression and linear classification using SVM.
 \end{abstract}
 
-% \begin{IEEEkeywords}
-% machine learning, logistic regression, support vector machine, stochastic gradient descent, Adam optimizer
-% \end{IEEEkeywords}
+%\begin{IEEEkeywords}
+%machine learning, logistic regression, support vector machine, stochastic gradient descent, Adam optimizer
+%\end{IEEEkeywords}
 
 \section{Introduction}
 Logistic Regression and Support Vector Machine (SVM) are two fundamental algorithms in machine learning, particularly for binary classification tasks. While logistic regression models the probability of a binary outcome using the sigmoid function, SVM attempts to find a hyperplane that best separates the classes with the maximum margin. Both algorithms can be trained using gradient-based optimization techniques, such as stochastic gradient descent (SGD) or more advanced methods like Adam.
@@ -219,7 +219,7 @@ We compare three initialization methods:
 
 \subsubsection{Logistic Regression Results}
 \paragraph{Effect of Initialization Methods}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_init_methods.png}
 \caption{Comparison of different initialization methods for Logistic Regression.}
@@ -229,7 +229,7 @@ We compare three initialization methods:
 Figure \ref{fig:lr_init} shows the performance of logistic regression with different initialization methods. While all methods eventually converge, normal and random initialization achieve faster convergence compared to zeros initialization. This is because zero initialization may lead to symmetry in the network, causing all neurons to learn the same features.
 
 \paragraph{Comparison of Optimizers}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_optimizers.png}
 \caption{Performance comparison between SGD and Adam optimizers for Logistic Regression.}
@@ -239,7 +239,7 @@ Figure \ref{fig:lr_init} shows the performance of logistic regression with diffe
 Figure \ref{fig:lr_opt} demonstrates that Adam optimizer consistently outperforms SGD, achieving faster convergence and better final performance. This is attributed to Adam's adaptive learning rates and momentum, which help overcome local minima and saddle points.
 
 \paragraph{Effect of Batch Size}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_batch_sizes.png}
 \caption{Performance of Logistic Regression with different batch sizes.}
@@ -250,7 +250,7 @@ Figure \ref{fig:lr_batch} shows that smaller batch sizes (32) lead to more noisy
 
 \subsubsection{SVM Results}
 \paragraph{Effect of Initialization Methods}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{svm_init_methods.png}
 \caption{Comparison of different initialization methods for SVM.}
@@ -260,7 +260,7 @@ Figure \ref{fig:lr_batch} shows that smaller batch sizes (32) lead to more noisy
 Similar to logistic regression, normal and random initialization methods perform better than zeros initialization for SVM, as shown in Figure \ref{fig:svm_init}. However, the difference is less pronounced compared to logistic regression, suggesting that SVM might be more robust to initialization.
 
 \paragraph{Comparison of Optimizers}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{svm_optimizers.png}
 \caption{Performance comparison between SGD and Adam optimizers for SVM.}
@@ -270,7 +270,7 @@ Similar to logistic regression, normal and random initialization methods perform
 Figure \ref{fig:svm_opt} confirms that Adam optimizer outperforms SGD for SVM as well. The adaptive learning rate of Adam helps navigate the non-smooth nature of the hinge loss function more effectively.
 
 \paragraph{Comparison of Loss Functions}
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{svm_loss_functions.png}
 \caption{Performance comparison between Hinge Loss and Squared Hinge Loss for SVM.}
@@ -281,7 +281,7 @@ Figure \ref{fig:svm_loss} compares hinge loss and squared hinge loss. Squared hi
 
 \subsubsection{Comparison between Logistic Regression and SVM}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{lr_vs_svm_comparison.png}
 \caption{Performance comparison between Logistic Regression and SVM.}
@@ -290,7 +290,7 @@ Figure \ref{fig:svm_loss} compares hinge loss and squared hinge loss. Squared hi
 
 Figure \ref{fig:lr_vs_svm} compares the best configurations of logistic regression and SVM. Both models achieve similar accuracy on the test set, but they show different training characteristics:
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Performance Comparison between Logistic Regression and SVM}
 \label{tab:comparison}
@@ -298,13 +298,13 @@ Figure \ref{fig:lr_vs_svm} compares the best configurations of logistic regressi
 \toprule
 \textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\
 \midrule
-Logistic Regression & 0.8401 & 0.7321 & 0.5094 & 0.6007 \\
-SVM & 0.8399 & 0.6988 & 0.5666 & 0.6258 \\
+Logistic Regression & 0.8476 & 0.7238 & 0.5736 & 0.6400 \\
+SVM & 0.8383 & 0.7536 & 0.4691 & 0.5782 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table \ref{tab:comparison} shows that SVM slightly outperforms logistic regression across all metrics. This can be attributed to SVM's margin maximization property, which often leads to better generalization, especially in high-dimensional spaces.
+Table \ref{tab:comparison} shows the performance of both models. Logistic Regression achieves a higher F1 score, Accuracy and Recall, while SVM shows better Precision. Overall, Logistic Regression demonstrates a better balance between precision and recall in this experiment.
 
 \section{Conclusion}
 Our experiments demonstrate the effectiveness of stochastic gradient descent (SGD) compared to full-batch gradient descent. By using mini-batches, SGD provides several advantages:
