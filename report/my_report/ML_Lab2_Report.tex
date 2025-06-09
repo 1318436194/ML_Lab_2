@@ -246,7 +246,7 @@ Figure \ref{fig:lr_opt} demonstrates that Adam optimizer consistently outperform
 \label{fig:lr_batch}
 \end{figure}
 
-Figure \ref{fig:lr_batch} shows that smaller batch sizes (32) lead to more noisy but potentially faster learning, while larger batch sizes (128) result in smoother convergence but might get stuck in local optima. A moderate batch size of 64 offers a good balance between convergence speed and stability.
+Figure \ref{fig:lr_batch} illustrates the impact of different batch sizes on the model's performance. As shown, smaller batch sizes, such as 32, exhibit more variance (noise) in the training accuracy curve but also converge to a high accuracy level more quickly in the initial training steps. Conversely, larger batch sizes result in smoother convergence curves. While all tested batch sizes eventually reach a similar validation accuracy, larger batch sizes achieve a slightly lower final loss. Considering the trade-off between convergence speed, stability, and computational cost per step, a moderate batch size like 64 or 128 appears to offer a good balance for this task.
 
 \subsubsection{SVM Results}
 \paragraph{Effect of Initialization Methods}
