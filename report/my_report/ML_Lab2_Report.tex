@@ -101,9 +101,9 @@ Undergraduate
 This laboratory report explores the implementation and comparison of Logistic Regression and Support Vector Machine (SVM) for binary classification problems. Both algorithms are implemented from scratch using numpy, with emphasis on understanding stochastic gradient descent (SGD) optimization. The experiment uses the a9a dataset from LIBSVM Data, which contains 32,561 training samples and 16,281 testing samples with 123 features. We investigate various aspects including parameter initialization methods, optimization algorithms (SGD and Adam), batch sizes, and loss functions. The report provides comprehensive results and analysis, comparing the performance of both models in terms of accuracy, precision, recall, and F1 score. Through this laboratory, we gain deeper insights into the similarities and differences between logistic regression and linear classification using SVM.
 \end{abstract}
 
-\begin{IEEEkeywords}
-machine learning, logistic regression, support vector machine, stochastic gradient descent, Adam optimizer
-\end{IEEEkeywords}
+% \begin{IEEEkeywords}
+% machine learning, logistic regression, support vector machine, stochastic gradient descent, Adam optimizer
+% \end{IEEEkeywords}
 
 \section{Introduction}
 Logistic Regression and Support Vector Machine (SVM) are two fundamental algorithms in machine learning, particularly for binary classification tasks. While logistic regression models the probability of a binary outcome using the sigmoid function, SVM attempts to find a hyperplane that best separates the classes with the maximum margin. Both algorithms can be trained using gradient-based optimization techniques, such as stochastic gradient descent (SGD) or more advanced methods like Adam.
@@ -118,17 +118,7 @@ In this laboratory, we implement and compare these algorithms from scratch using
 
 We use the a9a dataset from LIBSVM Data repository, which is derived from the Adult Census Income dataset. The task is to predict whether a person's income exceeds \$50,000 per year based on census data.
 
-\section{Methods}
-\subsection{Dataset}
-The a9a dataset contains 32,561 training samples and 16,281 testing samples, with each sample having 123 features. The dataset is pre-processed with the following steps:
-
-\begin{itemize}
-    \item Loading the data using sklearn's load\_svmlight\_file function
-    \item Converting sparse matrices to dense format
-    \item Adding a bias term (a column of ones) to the feature matrices
-    \item Converting labels to +1 (positive class) and -1 (negative class)
-\end{itemize}
-
+\section{Methods and Theory}
 \subsection{Logistic Regression}
 \subsubsection{Model Formulation}
 Logistic regression models the probability of a binary outcome as:
@@ -207,9 +197,19 @@ w_{t+1} &= w_t - \frac{\alpha \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 \end{align}
 where $\beta_1$ and $\beta_2$ are decay rates for the moment estimates, and $\epsilon$ is a small constant to prevent division by zero.
 
-\section{Experiments and Results}
+\section{Experiments}
+\subsection{Dataset}
+The a9a dataset contains 32,561 training samples and 16,281 testing samples, with each sample having 123 features. The dataset is pre-processed with the following steps:
 
-\subsection{Parameter Initialization}
+\begin{itemize}
+    \item Loading the data using sklearn's load\_svmlight\_file function
+    \item Converting sparse matrices to dense format
+    \item Adding a bias term (a column of ones) to the feature matrices
+    \item Converting labels to +1 (positive class) and -1 (negative class)
+\end{itemize}
+
+\subsection{Implementation}
+\subsubsection{Parameter Initialization}
 We compare three initialization methods:
 \begin{itemize}
     \item Zeros initialization: $w = \vec{0}$
@@ -217,9 +217,8 @@ We compare three initialization methods:
     \item Normal initialization: $w \sim \mathcal{N}(0, 0.01)$
 \end{itemize}
 
-\subsection{Logistic Regression Results}
-
-\subsubsection{Effect of Initialization Methods}
+\subsubsection{Logistic Regression Results}
+\paragraph{Effect of Initialization Methods}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_init_methods.png}
@@ -229,7 +228,7 @@ We compare three initialization methods:
 
 Figure \ref{fig:lr_init} shows the performance of logistic regression with different initialization methods. While all methods eventually converge, normal and random initialization achieve faster convergence compared to zeros initialization. This is because zero initialization may lead to symmetry in the network, causing all neurons to learn the same features.
 
-\subsubsection{Comparison of Optimizers}
+\paragraph{Comparison of Optimizers}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_optimizers.png}
@@ -239,7 +238,7 @@ Figure \ref{fig:lr_init} shows the performance of logistic regression with diffe
 
 Figure \ref{fig:lr_opt} demonstrates that Adam optimizer consistently outperforms SGD, achieving faster convergence and better final performance. This is attributed to Adam's adaptive learning rates and momentum, which help overcome local minima and saddle points.
 
-\subsubsection{Effect of Batch Size}
+\paragraph{Effect of Batch Size}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{logistic_regression_batch_sizes.png}
@@ -249,9 +248,8 @@ Figure \ref{fig:lr_opt} demonstrates that Adam optimizer consistently outperform
 
 Figure \ref{fig:lr_batch} shows that smaller batch sizes (32) lead to more noisy but potentially faster learning, while larger batch sizes (128) result in smoother convergence but might get stuck in local optima. A moderate batch size of 64 offers a good balance between convergence speed and stability.
 
-\subsection{SVM Results}
-
-\subsubsection{Effect of Initialization Methods}
+\subsubsection{SVM Results}
+\paragraph{Effect of Initialization Methods}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{svm_init_methods.png}
@@ -261,7 +259,7 @@ Figure \ref{fig:lr_batch} shows that smaller batch sizes (32) lead to more noisy
 
 Similar to logistic regression, normal and random initialization methods perform better than zeros initialization for SVM, as shown in Figure \ref{fig:svm_init}. However, the difference is less pronounced compared to logistic regression, suggesting that SVM might be more robust to initialization.
 
-\subsubsection{Comparison of Optimizers}
+\paragraph{Comparison of Optimizers}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{svm_optimizers.png}
@@ -271,7 +269,7 @@ Similar to logistic regression, normal and random initialization methods perform
 
 Figure \ref{fig:svm_opt} confirms that Adam optimizer outperforms SGD for SVM as well. The adaptive learning rate of Adam helps navigate the non-smooth nature of the hinge loss function more effectively.
 
-\subsubsection{Comparison of Loss Functions}
+\paragraph{Comparison of Loss Functions}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{svm_loss_functions.png}
@@ -281,7 +279,7 @@ Figure \ref{fig:svm_opt} confirms that Adam optimizer outperforms SGD for SVM as
 
 Figure \ref{fig:svm_loss} compares hinge loss and squared hinge loss. Squared hinge loss shows faster convergence due to its stronger penalty for violations, but standard hinge loss demonstrates slightly better generalization on the test set.
 
-\subsection{Comparison between Logistic Regression and SVM}
+\subsubsection{Comparison between Logistic Regression and SVM}
 
 \begin{figure}[htbp]
 \centering
@@ -308,9 +306,7 @@ SVM & 0.8399 & 0.6988 & 0.5666 & 0.6258 \\
 
 Table \ref{tab:comparison} shows that SVM slightly outperforms logistic regression across all metrics. This can be attributed to SVM's margin maximization property, which often leads to better generalization, especially in high-dimensional spaces.
 
-\section{Discussion}
-
-\subsection{Gradient Descent vs. Stochastic Gradient Descent}
+\section{Conclusion}
 Our experiments demonstrate the effectiveness of stochastic gradient descent (SGD) compared to full-batch gradient descent. By using mini-batches, SGD provides several advantages:
 
 \begin{itemize}
@@ -321,7 +317,6 @@ Our experiments demonstrate the effectiveness of stochastic gradient descent (SG
 
 The optimal batch size depends on the specific problem, but our experiments suggest that moderate batch sizes (32-64) often provide a good balance between computational efficiency and convergence stability.
 
-\subsection{Logistic Regression vs. SVM}
 While both algorithms aim to find a linear decision boundary, they differ in their optimization objectives:
 
 \begin{itemize}
@@ -333,7 +328,6 @@ Our results show that SVM slightly outperforms logistic regression in terms of c
 
 However, logistic regression provides probability estimates, which can be valuable in applications requiring risk assessment or confidence scores. Additionally, logistic regression can be more easily extended to multi-class problems without requiring multiple binary classifiers.
 
-\subsection{Optimization Methods}
 Our comparison of SGD and Adam optimizers consistently shows the superiority of Adam in terms of convergence speed and final performance. Adam combines the advantages of:
 
 \begin{itemize}
@@ -344,7 +338,6 @@ Our comparison of SGD and Adam optimizers consistently shows the superiority of 
 
 This combination makes Adam particularly effective for non-convex optimization problems like neural networks, but our experiments show it also benefits classical algorithms like logistic regression and SVM.
 
-\section{Conclusion}
 In this laboratory, we implemented and compared logistic regression and SVM algorithms from scratch. Our experiments on the a9a dataset provide the following key insights:
 
 \begin{itemize}
@@ -357,12 +350,5 @@ In this laboratory, we implemented and compared logistic regression and SVM algo
 These findings deepen our understanding of the connections and differences between logistic regression and linear classification using SVM, as well as the impact of different optimization strategies on model performance.
 
 Future work could explore kernel methods to extend SVM to non-linearly separable problems, multi-class extensions of these algorithms, and more sophisticated regularization techniques to further improve generalization.
-
-\begin{thebibliography}{00}
-\bibitem{bishop} C.M. Bishop, "Pattern Recognition and Machine Learning," Springer, 2006.
-\bibitem{vapnik} V. Vapnik, "The Nature of Statistical Learning Theory," Springer, 1995.
-\bibitem{bottou} L. Bottou, "Large-Scale Machine Learning with Stochastic Gradient Descent," Proceedings of COMPSTAT'2010, pp. 177-186, 2010.
-\bibitem{kingma} D.P. Kingma and J. Ba, "Adam: A Method for Stochastic Optimization," International Conference on Learning Representations, 2015.
-\end{thebibliography}
 
 \end{document} 
